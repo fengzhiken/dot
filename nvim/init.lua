@@ -5,6 +5,7 @@ set.shiftwidth = 2
 set.number = true
 set.clipboard = "unnamedplus"
 set.termguicolors = true
+set.background = "dark"
 vim.g.mapleader = ","
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

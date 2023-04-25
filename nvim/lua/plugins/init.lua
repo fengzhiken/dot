@@ -2,11 +2,14 @@ local plugins = {
 	{
 		"folke/tokyonight.nvim",
 		config = function()
+			require("tokyonight").setup({
+				transparent = "false",
+				styles = {
+					sidebars = "transparent",
+					floats = "transparent",
+				}
+			})
 			vim.cmd[[colorscheme tokyonight-night]]
-			vim.cmd[[
-				hi Normal ctermbg=None
-				hi Normal guibg=None
-			]]
 		end,
 	},
 	{
