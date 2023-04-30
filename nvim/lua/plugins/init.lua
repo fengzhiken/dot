@@ -15,7 +15,7 @@ local plugins = {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
-			require("plugins.config.cmp")
+			require("plugins.config.treesitter")
 		end,
 	},
 	{
@@ -48,6 +48,9 @@ local plugins = {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		config = function()
+			require("plugins.config.cmp")
+		end,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
@@ -56,6 +59,33 @@ local plugins = {
 			"hrsh7th/cmp-cmdline",
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+		},
+	},
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		config = function()
+			require("plugins.config.null-ls")
+		end,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
+	{
+		"tpope/vim-fugitive",
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup({})
+		end,
+	},
+	{
+		"folke/trouble.nvim",
+		config = function()
+			require("trouble").setup({})
+		end,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
 		},
 	},
 }
