@@ -15,8 +15,7 @@ local plugins = {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
-			require("plugins.config.treesitter")
-		end,
+			require("plugins.config.treesitter") end,
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -69,6 +68,9 @@ local plugins = {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+	},
+	{
+		"lervag/vimtex",
 	},
 	{
 		"tpope/vim-fugitive",
