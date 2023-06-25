@@ -1,7 +1,8 @@
 local servers = {
 	"lua_ls", "vimls",
 	"pyright",
-	"tsserver", "prismals"
+	"tsserver", "prismals",
+	"emmet_ls",
 }
 
 require("mason").setup()

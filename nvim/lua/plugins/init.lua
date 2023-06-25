@@ -58,6 +58,7 @@ local plugins = {
 			"hrsh7th/cmp-cmdline",
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
 		},
 	},
 	{
@@ -71,6 +72,20 @@ local plugins = {
 	},
 	{
 		"lervag/vimtex",
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {},
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup({})
+		end,
+	},
+	{
+		"tpope/vim-surround",
 	},
 	{
 		"tpope/vim-fugitive",
