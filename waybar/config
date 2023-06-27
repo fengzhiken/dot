@@ -1,0 +1,193 @@
+{
+	"layer": "top", // Waybar at top layer
+	"position": "top", // Waybar position (top|bottom|left|right)
+	"height": 24, // Waybar height (to be removed for auto height)
+	"margin-left": 0, // Waybar left margin
+	"margin-right": 0, // Waybar right margin
+	"spacing": 4, // Gaps between modules (4px)
+	"modules-left": ["custom/leftseparator", "sway/workspaces", "custom/middleseparator", "custom/spotify"],
+	"modules-center": ["sway/window"],
+	"modules-right": ["cpu", "temperature", "memory", "disk", "network", "bluetooth", "pulseaudio", "idle_inhibitor", "tray", "clock", "custom/rightseparator"],
+	"sway/workspaces": {
+    "disable-scroll": true,
+    "all_outputs": true,
+		"format": "{icon}",
+    "format-icons": {
+    //           󰙯     󰲒  🌎
+      "1": "",
+      "2": "",
+      "3": "󰙯",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "󰲒",
+      "10": "",
+    },
+		"sort-by-number": true,
+		//"persistent_workspaces": {
+		//	"一": [], // Always show a workspace with name '一', on all outputs if it does not exists
+		//	"二": [], // Always show a workspace with name '二', on all outputs if it does not exists
+		//	"三": [], // Always show a workspace with name '三', on all outputs if it does not exists
+		//	"四": [], // Always show a workspace with name '四', on all outputs if it does not exists
+		//	"五": [], // Always show a workspace with name '五', on all outputs if it does not exists
+		//	"六": [], // Always show a workspace with name '六', on all outputs if it does not exists
+		//}
+	},   
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+		"activated": "",
+		"deactivated": ""
+		},
+		"on-click-right": "swaylock",
+		"tooltip": true,
+		"tooltip-format-activated": "{status}",
+		"tooltip-format-deactivated": "{status}"
+	},
+  //"wlr/taskbar": {
+  //  "format": "{icon}"
+  //},
+	"sway/window": {
+    "format": "{}",
+    "max-length": 50,
+    "rewrite": {
+      "^(.*)— Mozilla Firefox$": " [$1]",
+      "^Mozilla Firefox$": "  Mozilla Firefox",
+
+      "^(.*) - Discord$": "󰙯 [$1]",
+      "^Discord$": "󰙯 Discord",
+
+      "^Spotify$": " Spotify",
+
+      "^~(.*)$": " Terminal",
+      "^fish(.*)$": " Terminal",
+      "^nvim(.*)$": " [$1]",
+      "^tmux(.*)$": " [$1]",
+    }
+	},
+	"tray": {
+    "spacing": 5
+	}, 
+	"clock": {
+		"format": " {:%H:%M}",
+		"format-alt": " {:%Y-%m-%d}",
+		"tooltip-format": "<span color='#74c7ec'><b><big>{:%Y %B}</big></b></span>\n<tt><small>{calendar}</small></tt>",
+		"calendar-weeks-pos": "left",
+		"today-format": "<span background='#cba6f7' color='#1e1e2e'><b>{}</b></span>",
+		"format-calendar": "<span color='#cdd6f4'><b>{}</b></span>",
+		"format-calendar-weeks": "<span color='#94e2d5'><b>{:%W} </b></span>",
+		"format-calendar-weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+		"on-scroll": {
+			"calendar": 1
+		}
+	},
+	"cpu": {
+		"format": " {usage}%",
+		"states": {
+			"warning": 80,
+			"critical": 90
+		},        
+		"tooltip": true,
+		"on-click": "$TERM -e htop",
+		"on-click-right": "killall htop"
+	},
+	"memory": {
+		"format": " {percentage}%",
+		"states": {
+			"warning": 80,
+			"critical": 90 
+		},
+		"tooltip": true,
+		"tooltip-format": "{used}GiB/{total}GiB",
+		"on-click": "$TERM -e btop",
+		"on-click-right": "killall btop"
+	},
+	"temperature": {
+		"hwmon-path": "/sys/devices/platform/dell_smm_hwmon/hwmon/hwmon2",
+		"input-filename": "temp1_input",
+		"critical-threshold": 80,
+		"format-critical": "{icon} {temperatureC}°C",
+		"format": "{icon} {temperatureC}°C",
+		"format-icons": ["", "", "", "", ""],
+		"tooltip": true
+	},
+	"disk": {
+		"format": " {percentage_used}%",
+		"states": {
+			"warning": 80,
+			"critical": 90
+		},
+		"on-click": "thunar",
+		"on-click-right": "killall thunar",
+		"path": "/home",
+		"tooltip": true,
+		"tooltip-format": "{path} {used}/{total}"
+	},
+  "custom/spotify": {
+    "exec": "/usr/bin/python3 $HOME/.config/waybar/scripts/mediaplayer.py --player spotify",
+    "format": " {}",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "max-length": 30,
+  },
+  "network": {
+    "format": "{ifname}",
+	  "format-wifi": "  {essid}",
+	  "format-ethernet": "",
+	  "format-disconnected": "",
+	  "format-linked": " No IP",
+	  "format-alt": " {bandwidthUpOctets}  {bandwidthDownOctets}",
+	  "tooltip-format": "{ifname} {ipaddr}/{cidr} {gwaddr}",
+  },
+	"bluetooth": {
+		"format": "",
+		"format-connected-battery": " {icon}",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n{status}",
+		"tooltip-format-off": "{controller_alias}\t{controller_address}\n{status}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n{num_connections} {status}\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+		"format-icons": {
+			"default": [ "", "", "", "", ""]
+		},
+		"on-click": "$TERM -e bluetoothctl",
+		"on-click-right": "killall bluetoothctl",
+		"on-scroll-up": "bluetoothctl power on",
+		"on-scroll-down": "bluetoothctl power off",
+	},
+	"pulseaudio": {
+		"format": "{icon}",
+		"tooltip-format": "{icon} {volume}% {format_source}",
+		"format-muted": "",
+		"format-source": " {volume}%",
+		"format-source-muted": "",
+		"ignored-sinks": ["Easy Effects Sink"],
+		"format-icons": {
+			"default": ["", "", ""]
+		},
+		"on-click": "$TERM -e pulsemixer",
+		"on-click-right": "killall pulsemixer",
+		"on-click-middle": "$HOME/Scripts/pa_spkr_toggle.sh",
+		"on-scroll-up": "$HOME/Scripts/pa_spkr_vol.sh inc",
+		"on-scroll-down": "$HOME/Scripts/pa_spkr_vol.sh dec"
+	},
+	"custom/rightseparator": {
+		"format": "|",
+		"interval": "once",
+		"tooltip": false
+	},
+	"custom/leftseparator": {
+		"format": "|",
+		"interval": "once",
+		"tooltip": false
+	},
+	"custom/middleseparator": {
+		"format": "|",
+		"interval": "once",
+		"tooltip": false
+	},
+}
