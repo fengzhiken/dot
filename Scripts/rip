@@ -1,0 +1,30 @@
+#!/bin/bash
+
+total_files=$#
+
+if [[ $total_files -lt 1 ]]; then
+  echo -en "rip: missing operand\n\nSyntax: rip <files_to_rip>\n\nTry 'rip --help for more information.\n"
+  exit 0
+fi
+
+if [[ $1 == *"-"* ]]; then
+  if [[ $1 == "--help" ]]; then
+    echo -en "rip: an rm command alternative\n\nSyntax: rip <files_to_rip>\n"
+  else
+    echo -en "rip: unrecognized option '$1'\nTry 'rip --help' for more information.\n"
+  fi
+  exit 0
+fi
+
+for file in "$@";
+do
+  if [ -f $file ]; then
+    last_date=$(date +"%Y-%m-%dT%H:%M:%S")
+    last_path=$(realpath $file)
+    trash_info_template="[Trash Info]\nPath=$last_path\nDeletionDate=$last_date\n"
+    mv $file ~/.local/share/Trash/files
+    echo -en $trash_info_template > ~/.local/share/Trash/info/$file.trashinfo
+  else
+    echo -en "rip: cannot rip '$file': No such filie or directory\n"
+  fi
+done;

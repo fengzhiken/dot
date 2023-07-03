@@ -1,0 +1,11 @@
+#!/bin/bash
+
+message=$1
+shift 1
+args=$@
+
+function remind() {
+    sleep $args && (paplay /home/bl4ck/Music/Sounds/bell.wav & notify-send "$message" -r 42069 -i /usr/share/icons/Arc/status/128/messagebox_warning.png -t 0 -w)
+}
+
+remind & disown

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+MY_ENV=/home/bl4ck/globalpip/venv
+env VIRTUAL_ENV=$MY_ENV PATH=$MY_ENV/bin:$PATH $@

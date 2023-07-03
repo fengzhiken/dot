@@ -1,17 +1,23 @@
 local plugins = {
 	{
-		"folke/tokyonight.nvim",
+		"maxmx03/dracula.nvim",
 		config = function()
-			require("tokyonight").setup({
-				transparent = "false",
-				styles = {
-					sidebars = "transparent",
-					floats = "transparent",
-				}
-			})
-			vim.cmd[[colorscheme tokyonight-night]]
+			vim.cmd[[colorscheme dracula]]
 		end,
 	},
+	--{
+	--	"folke/tokyonight.nvim",
+	--	config = function()
+	--		require("tokyonight").setup({
+	--			transparent = "false",
+	--			styles = {
+	--				sidebars = "transparent",
+	--				floats = "transparent",
+	--			}
+	--		})
+	--		vim.cmd[[colorscheme tokyonight-night]]
+	--	end,
+	--},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
@@ -120,13 +126,19 @@ local plugins = {
 		},
 	},
 	{
-		"toppair/peek.nvim",
-		build = "deno task --quiet build:fast",
+		"iamcco/markdown-preview.nvim",
+		build = "cd app && pnpm install",
+	},
+	{
+		"RRethy/vim-illuminate",
 		config = function()
-			require("peek").setup({})
-			vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-			vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+			require("plugins.config.illuminate")
 		end,
+	},
+	{
+		"ellisonleao/carbon-now.nvim",
+		opts = {},
+		cmd = "CarbonNow",
 	},
 }
 

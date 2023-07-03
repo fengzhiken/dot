@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+import pyshorteners
+import pyperclip
+import sys
+
+if len(sys.argv) < 2:
+    print("Provide a url to shorten!")
+    sys.exit(0)
+
+s = pyshorteners.Shortener()
+pyperclip.copy(s.isgd.short(sys.argv[1]))
